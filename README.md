@@ -45,3 +45,15 @@
 
 <br>
 
+# 진행과정
+
+### 깃허브
+깃허브에 저장소를 생성하여 먼저 웹을 만든다. 커밋은 git 커밋 컨벤션을 지켜 작성하도록 주의한다.
+
+커밋 컨벤션은 [이 블로그](https://overcome-the-limits.tistory.com/entry/%ED%98%91%EC%97%85-%ED%98%91%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-git-%EC%BB%A4%EB%B0%8B%EC%BB%A8%EB%B2%A4%EC%85%98-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)를 참고해서 작성한다.
+
+<br>
+
+### 웹
+
+index 페이지 : 사이트에 접속하면 가장 먼저 보는 페이지로 MyRehab에 대한 설명과 이용가이드의 설명을 포함한다.
