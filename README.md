@@ -74,6 +74,6 @@
 
 첫번째 select 박스에서 옵션을 선택하면 두번째 박스가 보이고, 두번째 박스에서 난이도 옵션을 선택하면 최종적으로 시작할 수 있는 버튼이 나온다.
 
-> JS를 통해 직접 구현을 했다. 처음에 addEventListner를 사용하여 select태그에 선택이 일어나면 stlye의 display 속성을 바꾸는 함수가 동작되도록 했는데 함수는 정상 작동하는 것을 확인했는데 select가 일어나도 display속성이 바뀌지 않았다. addEventListner의 select라는 옵션이 option태그가 선택될 때 동작되는 것이어서 정상작동이 안된다고 판단했고 select태그에 인라인으로 onchange을 작성하여 직접 함수를 동작시키도록 해서 문제를 해결하였다.
+> JS를 통해 직접 구현을 했다. 처음에 **addEventListner**를 사용하여 select태그에 선택이 일어나면 **style.display** 속성을 바꾸는 함수가 동작되도록 했는데 함수는 정상 작동하는 것을 확인했는데 select가 일어나도 display속성이 바뀌지 않았다. addEventListner의 select라는 옵션이 option태그가 선택될 때 동작되는 것이어서 정상작동이 안된다고 판단했고, select태그에 인라인으로 **onchange**을 작성하여 직접 함수를 동작시키도록 해서 문제를 해결하였다.
 
-> Form을 구현했는데 페이지가 이동되어도 값이 전달이 안됐다. select에 name이 추가되지 않아서 값이 함께 전달 될 name을 갖지 못해서 그런것이라 판단하여 name을 추가해줬더니 form이 정상 작동하였다.
+> Form을 구현했는데 페이지가 이동되어도 값이 전달이 안됐다. select에 name이 추가되지 않아서 값이 함께 전달 될 name을 갖지 못해서 그런것이라 판단하여 name을 추가해줘서 정상적으로 동작하도록 수정했다.
