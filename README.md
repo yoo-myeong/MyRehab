@@ -58,7 +58,7 @@
 
 ## :mag: 웹
 
-### index.html 
+### :small_blue_diamond: index.html 
 
 사이트에 접속하면 가장 먼저 보는 페이지로 MyRehab에 대한 설명과 이용가이드의 설명을 포함한다.
 
@@ -68,7 +68,7 @@
 
 <br>
 
-### RehabSelect.html
+### :small_blue_diamond: RehabSelect.html
 
 재활치료를 진행 할 부위를 선택하고 난이도를 선택하여 그에 맞는 페이지로 이동하기 위한 선택 기능을 제공한다.
 
@@ -80,7 +80,7 @@
 
 <br>
 
-### Django 프로젝트 생성
+### :small_blue_diamond: Django 프로젝트 생성
 
 ```python manage.py migration```을 통하여 기본 기능에 사용될 템플릿을 만들고 rehab앱을 생성하여 **rehab model**을 추가해줬다. **templates**를 생성하여 경로를 설정하고 만들어높은 html파일을 이동시켰다. **MVC패턴**으로 시스템 구조를 디자인하기 위해서 **views.py**와 **urls.py**을 기본 셋팅했다. 
 
