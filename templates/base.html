@@ -43,7 +43,7 @@
             <a href="{% url 'common:login' %}" style="text-decoration:none;font-family: 'twayair'; color:white;">✅로그인</a>
             {% endif %}
     </div>
-    <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light; background-color:white;" style="height: 96px;">
+    <nav class="shadow navbar navbar-expand-lg navbar-light bg-light; background-color:white;" style="height: 96px;">
         <div class="container-fluid" style="padding : 10px">
           <a class="navbar-brand" href="{% url 'rehab:index' %}" style="font-family: 'ImcreSoojin';padding-right: 50px;padding-left: 50px; font-size: 40px; color:rgb(126, 212, 44);">MyRehab</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,9 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link" href="{% url 'rehab:select' %}" style="font-family: 'EliceDigitalBaeum_Bold'; padding-right: 40px; padding-left: 40px; font-size:20px; ">재활 운동</a>
+                <a class="nav-link" href="" style="font-family: 'EliceDigitalBaeum_Bold';padding-right: 40px; padding-left: 40px; font-size:20px;">재활 게임</a>
               <a class="nav-link" href="{% url 'rehab:manage' %}" style="font-family: 'EliceDigitalBaeum_Bold';padding-right: 40px; padding-left: 40px; font-size:20px;">나의 기록</a>
+                <a class="nav-link" href="" style="font-family: 'EliceDigitalBaeum_Bold';padding-right: 40px; padding-left: 40px; font-size:20px;">상담게시판</a>
             </div>
 
           </div>
