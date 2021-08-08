@@ -3,7 +3,6 @@
 
 // the link to your model provided by Teachable Machine export panel
 
-
 const URL = "/static/model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 
@@ -52,6 +51,12 @@ async function predict() {
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
+    if (cnt===5){
+        console.log("open")
+        cnt ++
+        openModal()
+    }
+
     if (prediction[0].probability.toFixed(2) == 1.0) {
         status = "handsUp"
     }
@@ -72,7 +77,7 @@ async function predict() {
     }
     else if (prediction[3].probability.toFixed(2) == 1.0) {
         if (status == "handsUp") {
-            var audio = new Audio("bent.mp3")
+            var audio = new Audio("/static/bent.mp3")
             audio.play();
         }
         status = "bent"
