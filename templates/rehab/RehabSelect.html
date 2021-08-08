@@ -2,20 +2,15 @@
 {% load static %}
 {% block content %}
     <!-- start -->
-    <div>
-      <h4 style="font-family: 'ONE-Mobile-POP';text-align: center;margin-top: 50px;margin-bottom: 50px;">
+    <div class="Info">
+      <h4>
         재활이 필요한 부위를 선택한 뒤, 난이도를 설정하고 확인을 눌러주세요
       </h4>
     </div>
 
-    <div class="container">
-    
+    <div class = "selectContainer">
       <form action="{% url 'rehab:Rehab' %}" method="get">
-
         <div class="row" style="margin-bottom: 50px; margin-top: 50px;">
-          <div class="col">
-          </div>
-          <div class="col">
             <select id="select1" class="form-select" aria-label="Default select example" onchange="select2Display(1)" name = "part">
               <option selected>부위 선택</option>
               <option value="knee">무릎</option>
@@ -23,39 +18,19 @@
               <option value="sholder">어깨</option>
             </select>
           </div>
-          <div class="col">
-          </div>
-        </div>
-    
         <div class="row" style="margin-bottom: 50px; margin-top: 50px;">
-          <div class="col">
-          </div>
-          <div class="col">
-            <select id="select2" class="form-select" aria-label="Default select example" style="display: none ;"
-              onchange="select2Display(2)" name = "step">
+            <select id="select2" class="form-select hidden" aria-label="Default select example" onchange="select2Display(2)" name = "step">
               <option selected>난이도 선택</option>
               <option value="1">1단계</option>
               <option value="2">2단계</option>
               <option value="3">3단계</option>
             </select>
-          </div>
-          <div class="col">
-          </div>
         </div>
-    
         <div class="row" style="margin-bottom: 50px; margin-top: 50px;">
-          <div class="col">
-          </div>
-          <div class="col">
-            <button type="submit" id="select3" class="btn btn-outline-info" style="display: none;">시작</button>
-          </div>
-          <div class="col">
-          </div>
+            <button type="submit" id="select3" class="btn btn-outline-info hidden">시작</button>
         </div>
       </form>
-
     </div>
-
     <script src="{% static 'selectForm.js' %}"></script>
     <!-- end -->
 {% endblock %}

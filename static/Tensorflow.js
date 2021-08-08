@@ -42,6 +42,10 @@ async function loop(timestamp) {
 }
 let status = "handsUp"
 let cnt = 0
+function countUp(){
+    cnt ++;
+    console.log(cnt)
+}
 async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element

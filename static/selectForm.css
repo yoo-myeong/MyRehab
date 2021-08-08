@@ -1,0 +1,46 @@
+.Info h4{
+    font-family: 'ONE-Mobile-POP';
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size:1.8vw;
+}
+
+.hidden{
+    display:none;
+}
+
+.selectContainer{
+    text-align : center;
+}
+
+button {
+    all: unset;
+    background-color: steelblue;
+    color: white;
+    padding: 15px 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 100%;
+    font-family: 'ImcreSoojin';
+    font-size : 1.2vw;
+  }
+
+select {
+  width: 200px;
+  padding: .8em .5em;
+  font-family: inherit;
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #999;
+  border-radius: 0px;
+  font-family: 'EliceDigitalBaeum_Bold';
+  font-size : 1.2vw;
+}
+
+select::-ms-expand { /* for IE 11 */
+    display: none;
+}
