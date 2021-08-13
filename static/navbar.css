@@ -124,14 +124,14 @@ color: #482ff7;
 
     border: solid #1010101a;
 
-    width: 18vw;
+    width: 20rem;
 
-    height: 18vw;
+    height: 20rem;
 
 }
 
 .circleBox h1{
-    font-size:1.8vw;
+    font-size: 2rem;
     font-family: 'EliceDigitalBaeum_Bold';
     color:#101010a6;
 }
