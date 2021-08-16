@@ -3,7 +3,7 @@
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
-    font-size:1.8vw;
+    font-size:3em;
 }
 
 .hidden{
@@ -24,7 +24,7 @@ button {
     cursor: pointer;
     height: 100%;
     font-family: 'ImcreSoojin';
-    font-size : 1.2vw;
+    font-size : 3rem;
   }
 
 select {
@@ -38,7 +38,7 @@ select {
   border: 1px solid #999;
   border-radius: 0px;
   font-family: 'EliceDigitalBaeum_Bold';
-  font-size : 1.2vw;
+  font-size : 2rem;
 }
 
 select::-ms-expand { /* for IE 11 */
