@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('rehab.urls')),
     path('common/', include('common.urls')),
+    path('board/', include('board.urls')),
 ]
