@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rehab.apps.RehabConfig',
     'common.apps.CommonConfig',
+    'board.apps.BoardConfig',
 ]
 
 MIDDLEWARE = [
