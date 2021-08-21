@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
     <link rel="stylesheet" href="{% static 'selectForm.css' %}">
     <link rel="stylesheet" href="{% static 'modal.css' %}">
+
     <style>
         @font-face {
             font-family: 'ImcreSoojin';
@@ -60,7 +61,7 @@
                     <a href="{% url 'rehab:manage' %}" class="nav-link">나의기록</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">상담게시판</a>
+                    <a href="{% url 'board:board' %}" class="nav-link">상담게시판</a>
                 </li>
             </ul>
             <div class="hamburger">
