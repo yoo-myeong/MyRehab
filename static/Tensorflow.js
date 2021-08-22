@@ -3,7 +3,7 @@
 
 // the link to your model provided by Teachable Machine export panel
 
-const URL = "/static/model/";
+const URL = "/static/model/shoulder/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 
 async function init() {
@@ -39,7 +39,7 @@ async function loop(timestamp) {
     await predict();
     window.requestAnimationFrame(loop);
 }
-let status = "handsUp"
+let status = "down"
 let cnt = 0
 function countUp(){
     cnt ++;
@@ -58,17 +58,18 @@ async function predict() {
     }
 
     if (prediction[0].probability.toFixed(2) == 1.0) {
-        status = "handsUp"
+        status = "up"
     }
     else if (prediction[1].probability.toFixed(2) == 1.0) {
-        if (status == "handsUp") {
+        if (status == "up") {
             cnt++
             console.log(cnt)
         }
-        status = "pullDown"
+        status = "down"
     }
     else if (prediction[2].probability.toFixed(2) == 1.0) {
-        if (status == "handsUp") {
+        if (status == "up" || status == "down") {
+            console.log("bent")
             var audio = new Audio("/static/bent.mp3")
             audio.play();
         }
@@ -76,7 +77,8 @@ async function predict() {
 
     }
     else if (prediction[3].probability.toFixed(2) == 1.0) {
-        if (status == "handsUp") {
+        if (status == "up" || status == "down") {
+            console.log("bent")
             var audio = new Audio("/static/bent.mp3")
             audio.play();
         }
