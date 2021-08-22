@@ -3,6 +3,7 @@
 {% block content %}
 
 <form action="{% url 'rehab:my_manage' %}" method = "post">
+    {% csrf_token %}
     <div class = "modal hidden">
         <input type="hidden" name="step" value={{step}}>
         <input type="hidden" name="part" value={{part}}>
@@ -13,9 +14,11 @@
         </div>
     </div>
 </form>
-
-<button type="button" onclick="init()">Start</button>
-<button onclick="countUp()">count up</button>
+<h1 class="part hidden">{{part}}</h1>
+<div>
+    <button class="start_button" type="button" onclick="init()">Start</button>
+    <button onclick="countUp()">count up</button>
+</div>
 <div><canvas id="canvas"></canvas></div>
 <div id="label-container"></div>
 

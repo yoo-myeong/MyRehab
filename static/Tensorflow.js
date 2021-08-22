@@ -3,12 +3,17 @@
 
 // the link to your model provided by Teachable Machine export panel
 
-const URL = "/static/model/shoulder/";
+const URL = "/static/model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
+part_tag = document.querySelector('.part')
+part = part_tag.innerText
 
 async function init() {
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
+    start_button = document.querySelector('.start_button')
+    start_button.classList.add('hidden')
+
+    const modelURL = URL + part + "/model.json";
+    const metadataURL = URL + part + "/metadata.json";
 
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
@@ -17,7 +22,7 @@ async function init() {
     maxPredictions = model.getTotalClasses();
 
     // Convenience function to setup a webcam
-    const size = 200;
+    const size = 500;
     const flip = true; // whether to flip the webcam
     webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
     await webcam.setup(); // request access to the webcam
@@ -51,7 +56,7 @@ async function predict() {
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
-    if (cnt===5){
+    if (cnt>=5){
         console.log("open")
         cnt ++
         openModal()

@@ -10,7 +10,7 @@ def select(request):
 
 def my_manage(request):
     if request.method == 'POST':
-        m = manage(user_id=request.user, part=request.GET.get('part'), level=request.GET.get('step'), create_at=timezone.now())
+        m = manage(user_id=request.user, part=request.POST.get('part'), level=request.POST.get('step'), create_at=timezone.now())
         m.save()
     return render(request, 'rehab/manage.html')
 
