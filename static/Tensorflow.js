@@ -7,6 +7,8 @@ const URL = "/static/model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 part_tag = document.querySelector('.part')
 part = part_tag.innerText
+circle = document.querySelector('.dot-circle')
+circle_text = circle.innerText
 
 async function init() {
     start_button = document.querySelector('.start_button')
@@ -22,7 +24,7 @@ async function init() {
     maxPredictions = model.getTotalClasses();
 
     // Convenience function to setup a webcam
-    const size = 500;
+    const size = 400;
     const flip = true; // whether to flip the webcam
     webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
     await webcam.setup(); // request access to the webcam
@@ -33,10 +35,6 @@ async function init() {
     const canvas = document.getElementById("canvas");
     canvas.width = size; canvas.height = size;
     ctx = canvas.getContext("2d");
-    labelContainer = document.getElementById("label-container");
-    for (let i = 0; i < maxPredictions; i++) { // and class labels
-        labelContainer.appendChild(document.createElement("div"));
-    }
 }
 
 async function loop(timestamp) {
@@ -50,15 +48,16 @@ function countUp(){
     cnt ++;
     console.log(cnt)
 }
+
 async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
+    circle.innerText = cnt
     if (cnt>=5){
         console.log("open")
-        cnt ++
         openModal()
     }
 
@@ -89,12 +88,6 @@ async function predict() {
         }
         status = "bent"
 
-    }
-
-    for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
     }
 
     // finally draw the poses

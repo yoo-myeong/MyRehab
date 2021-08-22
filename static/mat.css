@@ -1,0 +1,44 @@
+.dot{
+    width: 5rem;
+    height : 5rem;
+    background-color: white;
+    border: 0.188rem solid cadetblue ;
+    color: white;
+    font-size: 3rem;
+    line-height: 5rem;
+    text-align: center;
+    display: inline-block;
+    color: black;
+    border-radius: 8%;
+    margin : 0.5rem;
+}
+
+
+.dot-wrapper{
+    width: 40rem;
+    margin: 0.5rem 0.2rem;
+    text-align:center;
+    display: inline-block;
+}
+
+.dot-wrapper-wrpper{
+    width:42rem;
+    text-align:center;
+    display: inline-block;
+    border: 0.2rem solid cadetblue;
+    background-color: rgb(112, 160, 161);
+    border-radius: 2%;
+    margin : 1rem 1rem;
+}
+
+.dot-circle{
+    width:13rem;
+    height: 13rem;
+    box-shadow: 0rem 0rem 0.3rem 0.2rem;
+    background-color: orangered;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 13rem;
+    font-family: fantasy;
+    font-size: 5rem;
+}
