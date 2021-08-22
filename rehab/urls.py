@@ -7,6 +7,6 @@ urlpatterns = [
     path('', views.index, name=''),
     path('index/', views.index, name='index'),
     path('select/', views.select, name='select'),
-    path('manage/', views.manage, name='manage'),
+    path('manage/', views.my_manage, name='my_manage'),
     path('rehab/', views.rehab, name='Rehab'),
 ]

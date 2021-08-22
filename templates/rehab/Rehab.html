@@ -2,24 +2,22 @@
 {% load static %}
 {% block content %}
 
-<div class = "modal hidden">
-    <div class = "modal_overlay"></div>
-    <div class="modal_content">
-        <h1>I'm modal</h1>
-        <button>✖</button>
+<form action="{% url 'rehab:my_manage' %}" method = "post">
+    <div class = "modal hidden">
+        <input type="hidden" name="step" value={{step}}>
+        <input type="hidden" name="part" value={{part}}>
+        <div class = "modal_overlay"></div>
+        <div class="modal_content">
+            <h1>기록관리 페이지로 이동하겠습니다</h1>
+            <button type="submit">YES</button>
+        </div>
     </div>
-</div>
+</form>
 
-<h1 class = "context hidden">{{part}}{{level}}</h1>
 <button type="button" onclick="init()">Start</button>
 <button onclick="countUp()">count up</button>
 <div><canvas id="canvas"></canvas></div>
 <div id="label-container"></div>
-
-<script>
-    h1 = document.querySelector('.context')
-    console.log(h1.innerText)
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
