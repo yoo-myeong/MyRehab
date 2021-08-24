@@ -20,16 +20,25 @@ console.log(step)
 
 //인자를 firebase에 업로드해주는 함수
 var database = firebase.database();
-function writeUserData(value) {
+function writeLed0_7(value) {
     firebase.database().ref('LED/LED0_7/').set(value);
+}
+function writeLed8_15(value) {
+    firebase.database().ref('LED/LED8_15/').set(value);
+}
+function writeLed16_19(value) {
+    firebase.database().ref('LED/LED16_19/').set(value);
+}
+function writeLed20_23(value) {
+    firebase.database().ref('LED/LED20_23/').set(value);
 }
 
 if(part==="shoulder"){
-    writeUserData("01100000")
+    writeLed0_7("00000000");
+    writeLed8_15("00100010");
+    writeLed16_19("0000");
+    writeLed20_23("0000");
 }
-
-// 매트 dot 가져오기
-
 
 //리스너로 이벤트 발생 시 값 수신
 var Press0_11 = firebase.database().ref('PRESS/PRESS0_11');
