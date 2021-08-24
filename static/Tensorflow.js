@@ -1,12 +1,13 @@
-// More API functions here:
-// https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
-
-// the link to your model provided by Teachable Machine export panel
-
 const URL = "/static/model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
-part_tag = document.querySelector('.part')
-part = part_tag.innerText
+
+// part와 step 가져오기
+part_h1 = document.querySelector('.part')
+part = part_h1.innerText
+step_h1 = document.querySelector('.step')
+step = step_h1.innerText
+
+// circle innerText 선택
 circle = document.querySelector('.dot-circle')
 circle_text = circle.innerText
 
@@ -17,46 +18,47 @@ async function init() {
     const modelURL = URL + part + "/model.json";
     const metadataURL = URL + part + "/metadata.json";
 
-    // load the model and metadata
-    // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-    // Note: the pose library adds a tmPose object to your window (window.tmPose)
     model = await tmPose.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
 
-    // Convenience function to setup a webcam
     const size = 400;
-    const flip = true; // whether to flip the webcam
-    webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
-    await webcam.setup(); // request access to the webcam
+    const flip = true;
+    webcam = new tmPose.Webcam(size, size, flip);
+    await webcam.setup();
     await webcam.play();
     window.requestAnimationFrame(loop);
 
-    // append/get elements to the DOM
     const canvas = document.getElementById("canvas");
     canvas.width = size; canvas.height = size;
     ctx = canvas.getContext("2d");
 }
 
 async function loop(timestamp) {
-    webcam.update(); // update the webcam frame
+    webcam.update();
     await predict();
     window.requestAnimationFrame(loop);
 }
 let status = "down"
 let cnt = 0
+
 function countUp(){
     cnt ++;
     console.log(cnt)
 }
 
 async function predict() {
-    // Prediction #1: run input through posenet
-    // estimatePose can take in an image, video or canvas html element
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-    // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
+
+    // 카운트 숫자 최신화
+    // 카운트 안의 값 5 안넘어가게 설정
+    if (cnt >=5){
+        cnt = 5
+    }
     circle.innerText = cnt
-    if (cnt>=5){
+
+    // 카운트 5번 되면 모달창 띄우기
+    if (cnt===5){
         console.log("open")
         openModal()
     }
@@ -90,14 +92,12 @@ async function predict() {
 
     }
 
-    // finally draw the poses
     drawPose(pose);
 }
 
 function drawPose(pose) {
     if (webcam.canvas) {
         ctx.drawImage(webcam.canvas, 0, 0);
-        // draw the keypoints and skeleton
         if (pose) {
             const minPartConfidence = 0.5;
             tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
