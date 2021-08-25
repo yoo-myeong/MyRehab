@@ -29,6 +29,7 @@
     background-color: rgb(112, 160, 161);
     border-radius: 2%;
     margin : 1rem 1rem;
+    margin-top : 10rem;
 }
 
 .dot-circle{
@@ -41,4 +42,36 @@
     line-height: 13rem;
     font-family: fantasy;
     font-size: 5rem;
+    display:inline-block;
+}
+
+#canvas{
+    width: 400px;
+    height: 400px;
+    display:inline-block;
+}
+
+.wrap{
+    height:550px;
+    margin-top : 2rem;
+    display:flex;
+}
+.wrap_left{
+    width : 500px;
+    flex : 1;
+    text-align:center;
+
+}
+.wrap_middle{
+    flex : 1;
+    text-align:center;
+}
+.wrap_right{
+    flex : 1;
+    text-align:center;
+}
+
+#rehabImg{
+    margin-top : 5rem;
+    border-radius:10%;
 }
