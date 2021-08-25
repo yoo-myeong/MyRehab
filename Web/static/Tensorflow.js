@@ -63,33 +63,29 @@ async function predict() {
         openModal()
     }
 
+    // up, down, bent 판정
     if (prediction[0].probability.toFixed(2) == 1.0) {
-        status = "up"
+        if (status == "down") {
+            status = "up"
+            cnt++
+        }
     }
     else if (prediction[1].probability.toFixed(2) == 1.0) {
         if (status == "up") {
-            cnt++
-            console.log(cnt)
+            status = "down"
         }
-        status = "down"
     }
     else if (prediction[2].probability.toFixed(2) == 1.0) {
-        if (status == "up" || status == "down") {
-            console.log("bent")
+        if (status == "down") {
             var audio = new Audio("/static/bent.mp3")
             audio.play();
         }
-        status = "bent"
-
     }
-    else if (prediction[3].probability.toFixed(2) == 1.0) {
-        if (status == "up" || status == "down") {
-            console.log("bent")
-            var audio = new Audio("/static/bent.mp3")
-            audio.play();
-        }
-        status = "bent"
 
+    // 판단 후 갱신된 status로 firebase의 LED제어 값 갱신
+    if(status != "bent"){
+        f_data = part + status
+        FirebaseLEDSetByPart(f_data)
     }
 
     drawPose(pose);

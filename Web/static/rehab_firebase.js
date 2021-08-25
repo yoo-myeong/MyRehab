@@ -15,9 +15,6 @@ function writeUserData(value) {
     firebase.database().ref('users/').set(value);
 }
 
-console.log(part)
-console.log(step)
-
 //인자를 firebase에 업로드해주는 함수
 var database = firebase.database();
 function writeLed0_7(value) {
@@ -33,32 +30,61 @@ function writeLed20_23(value) {
     firebase.database().ref('LED/LED20_23/').set(value);
 }
 
-if(part==="shoulder"){
-    writeLed0_7("00000000");
-    writeLed8_15("00100010");
-    writeLed16_19("0000");
-    writeLed20_23("0000");
-}
-else if(part==="knee"){
-    writeLed0_7("01000000");
-    writeLed8_15("00000010");
-    writeLed16_19("0000");
-    writeLed20_23("0000");
-}
-else if(part==="backbone"){
-    writeLed0_7("00000110");
-    writeLed8_15("01100000");
-    writeLed16_19("1001");
-    writeLed20_23("0000");
+//파트별 firebase 업로드 함수
+function FirebaseLEDSetByPart(data){
+    if(data === "shoulderup"){ // 10번,14번 스텝핑
+        writeLed0_7("00000000");
+        writeLed8_15("00100010");
+        writeLed16_19("0000");
+        writeLed20_23("0000");
+    }
+    else if(data === "shoulderdown"){ // 10번,14번 스텝핑
+        writeLed0_7("00000000");
+        writeLed8_15("00100010");
+        writeLed16_19("0000");
+        writeLed20_23("0000");
+    }
+    else if(data === "kneeup"){ // 1번,14번 스텝핑
+        writeLed0_7("01000000");
+        writeLed8_15("00000010");
+        writeLed16_19("0000");
+        writeLed20_23("0000");
+    }
+    else if(data === "kneedown"){ //13번,14번 스텝핑
+        writeLed0_7("0000000");
+        writeLed8_15("00000110");
+        writeLed16_19("0000");
+        writeLed20_23("0000");
+    }
+    else if(data === "backboneup"){
+        writeLed0_7("00000110");
+        writeLed8_15("01100000");
+        writeLed16_19("0110");
+        writeLed20_23("0000");
+    }
+    else if(data === "backbonedown"){
+        writeLed0_7("00000110");
+        writeLed8_15("01100000");
+        writeLed16_19("0010");
+        writeLed20_23("0000");
+    }
 }
 
-//리스너로 이벤트 발생 시 값 수신
+if(part==="shoulder"){
+    FirebaseLEDSetByPart("shoulderup")
+}
+else if(part==="knee"){
+    FirebaseLEDSetByPart("kneeup")
+}
+else if(part==="backbone"){
+    FirebaseLEDSetByPart("backboneup")
+}
+
+//리스너로 이벤트 발생 시 값 수신해서 mat css 색깔 on
 var Press0_11 = firebase.database().ref('PRESS/PRESS0_11');
   Press0_11.on('value', (snapshot) => {
-  console.log("snapshot.val() is" , snapshot.val());
   const data = snapshot.val();
   const parsedlist = JSON.parse(data);
-  console.log("parsedlist is" ,parsedlist);
   var step;
   for(step = 0; step<12; step++){
         let dot = document.getElementById(`dot${step}`)
@@ -74,10 +100,8 @@ var Press0_11 = firebase.database().ref('PRESS/PRESS0_11');
 
 var Press12_23 = firebase.database().ref('PRESS/PRESS12_23');
   Press12_23.on('value', (snapshot) => {
-  console.log("snapshot.val() is" , snapshot.val());
   const data = snapshot.val();
   const parsedlist = JSON.parse(data);
-  console.log("parsedlist is" ,parsedlist);
   var step;
   for(step = 0; step<12; step++){
         let dot = document.getElementById(`dot${step+12}`)
