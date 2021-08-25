@@ -39,6 +39,18 @@ if(part==="shoulder"){
     writeLed16_19("0000");
     writeLed20_23("0000");
 }
+else if(part==="knee"){
+    writeLed0_7("01000000");
+    writeLed8_15("00000010");
+    writeLed16_19("0000");
+    writeLed20_23("0000");
+}
+else if(part==="backbone"){
+    writeLed0_7("00000110");
+    writeLed8_15("01100000");
+    writeLed16_19("1001");
+    writeLed20_23("0000");
+}
 
 //리스너로 이벤트 발생 시 값 수신
 var Press0_11 = firebase.database().ref('PRESS/PRESS0_11');
