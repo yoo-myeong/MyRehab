@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta property="og:title" content="Rhythm" />
+    <meta property="og:description"
+        content="A vertical scrolling rhythm game where you have to hit the notes falling down, which will appear according to the music." />
+    <meta property="og:url" content="https://chloeliang.github.io/rhythm-game/" />
+    <meta property="og:image" content="https://res.cloudinary.com/nliangxin/image/upload/v1543036731/rhythm.png" />
+    <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/dusk/50/ecf0f1/musical-notes.png" />
+    <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'rythm.css' %}" />
+    <title>Game</title>
+</head>
+
+<body>
+    <audio class="song_1" src="{% static 'media/song_1.mp3' %}"></audio>
+    <audio class="song_2" src="{% static 'media/song_2.mp3' %}"></audio>
+    <audio class="song_3" src="{% static 'media/song_3.mp3' %}"></audio>
+
+
+    <main>
+        <div class="game">
+            <div class="hit">
+                <div class="hit__combo"></div>
+                <div class="hit__accuracy"></div>
+            </div>
+
+            <div class="track-container"></div>
+
+            <div class="key-container">
+                <div class="key key--s key--ev">
+                    <div class="keypress keypress--ev"></div>
+                    <span>Z</span>
+                </div>
+                <div class="key key--d key--od">
+                    <div class="keypress keypress--od"></div>
+                    <span>X</span>
+                </div>
+                <div class="key key--f key--ev">
+                    <div class="keypress keypress--ev"></div>
+                    <span>C</span>
+                </div>
+                <div class="key key--space key--od">
+                    <div class="keypress keypress--od"></div>
+                    <span>V</span>
+                </div>
+                <div class="key key--j key--ev">
+                    <div class="keypress keypress--ev"></div>
+                    <span>B</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu">
+
+            <div class="menu__config">
+                <div class="config__song">
+                    <h2>노래 선택</h2>
+                    <div>
+                        <a class="btn btn--song btn--selected" style="margin-bottom : 10px;" href="#">a</a>
+                        <a class="btn btn--song" style="margin-bottom : 10px;" href="#">b</a>
+                        <a class="btn btn--song" style="margin-bottom : 10px;" href="#">c</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu__config">
+                <div class="config__hand">
+                    <h2>플레이할 손 선택</h2>
+                    <div>
+                        <a class="btn btn--hand btn--selected" style="margin-right : 50px;" href="#">Left</a>
+                        <a class="btn btn--hand" style="margin-right : 10px;" href="#">Right</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu_start">
+                <a class="btn btn--primary btn--start" href="#">Start</a>
+            </div>
+        </div>
+
+        <div class="summary">
+            <div class="summary__timer"></div>
+            <div class="summary__result">
+                <h2 class="result__heading">Clear</h2>
+                <div class="result__accuracy perfect">
+                    <p class="accuracy__heading">Perfect</p>
+                    <span>:</span>
+                    <p class="accuracy__count perfect__count"></p>
+                </div>
+                <div class="result__accuracy good">
+                    <p class="accuracy__heading">Good</p>
+                    <span>:</span>
+                    <p class="accuracy__count good__count"></p>
+                </div>
+                <div class="result__accuracy bad">
+                    <p class="accuracy__heading">Bad</p>
+                    <span>:</span>
+                    <p class="accuracy__count bad__count"></p>
+                </div>
+                <div class="result__accuracy miss">
+                    <p class="accuracy__heading">Miss</p>
+                    <span>:</span>
+                    <p class="accuracy__count miss__count"></p>
+                </div>
+                <div class="result__accuracy combo">
+                    <p class="accuracy__heading">Max Combo</p>
+                    <span>:</span>
+                    <p class="accuracy__count combo__count"></p>
+                </div>
+                <div class="result__accuracy score">
+                    <p class="accuracy__heading">Score</p>
+                    <span>:</span>
+                    <p class="accuracy__count score__count"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+    <script class="song_1" src="{% static 'song.js'%}"></script>
+    <script src="{% static 'script.js'%}"></script>
+
+    
+
+</body>
+
+</html>

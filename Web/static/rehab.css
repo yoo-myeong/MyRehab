@@ -11,6 +11,7 @@
     color: black;
     border-radius: 8%;
     margin : 0.5rem;
+    vertical-align : text-top;
 }
 
 
@@ -72,6 +73,8 @@
 }
 
 #rehabImg{
+    width:500px;
+    height:391px;
     margin-top : 5rem;
     border-radius:10%;
 }

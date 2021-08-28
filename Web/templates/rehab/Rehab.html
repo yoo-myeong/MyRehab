@@ -24,52 +24,53 @@
 <div class="wrap">
     <div class = "wrap_left">
         <button class="start_button" type="button" onclick="init()">Start</button>
+         <button class="count_button hidden" type="button" onclick="statusChange()">count</button>
         <canvas id="canvas"></canvas>
         <div class="dot-circle">
             0
         </div>
     </div>
     <div class="wrap_middle">
-        <img id="rehabImg" src="{% static 'img/ready.jpg/' %}">
+        <img id="rehabImg" src="/static/img/ready.jpg/">
         <h1 style="font-family: 'HSYuji-Regular';">그림에 나오는 동작을 따라해주세요</h1>
     </div>
     <div class="wrap_right">
         <div class="dot-wrapper-wrpper">
             <div class="dot-wrapper">
-                <div class="dot 3" id ="dot3"></div>
-                <div class="dot 7" id ="dot7"></div>
-                <div class="dot 11" id ="dot11"></div>
-                <div class="dot 15" id ="dot15"></div>
-                <div class="dot 19" id ="dot19"></div>
-                <div class="dot 23" id ="dot23"></div>
+                <div class="dot 3" id ="dot3"><h4></h4></div>
+                <div class="dot 7" id ="dot7"><h4></h4></div>
+                <div class="dot 11" id ="dot11"><h4></h4></div>
+                <div class="dot 15" id ="dot15"><h4></h4></div>
+                <div class="dot 19" id ="dot19"><h4></h4></div>
+                <div class="dot 23" id ="dot23"><h4></h4></div>
             </div>
             <div class="dot-wrapper">
-                <div class="dot 2" id ="dot2"></div>
-                <div class="dot 6" id ="dot6"></div>
-                <div class="dot 10" id ="dot10"></div>
-                <div class="dot 14" id ="dot14"></div>
-                <div class="dot 18" id ="dot18"></div>
-                <div class="dot 22" id ="dot22"></div>
+                <div class="dot 2" id ="dot2"><h4></h4></div>
+                <div class="dot 6" id ="dot6"><h4></h4></div>
+                <div class="dot 10" id ="dot10"><h4></h4></div>
+                <div class="dot 14" id ="dot14"><h4></h4></div>
+                <div class="dot 18" id ="dot18"><h4></h4></div>
+                <div class="dot 22" id ="dot22"><h4></h4></div>
             </div>
             <div class="dot-wrapper">
-                <div class="dot 1" id ="dot1"></div>
-                <div class="dot 5" id ="dot5"></div>
-                <div class="dot 9" id ="dot9"></div>
-                <div class="dot 13" id ="dot13"></div>
-                <div class="dot 17" id ="dot17"></div>
-                <div class="dot 21" id ="dot21"></div>
+                <div class="dot 1" id ="dot1"><h4></h4></div>
+                <div class="dot 5" id ="dot5"><h4></h4></div>
+                <div class="dot 9" id ="dot9"><h4></h4></div>
+                <div class="dot 13" id ="dot13"><h4></h4></div>
+                <div class="dot 17" id ="dot17"><h4></h4></div>
+                <div class="dot 21" id ="dot21"><h4></h4></div>
             </div>
             <div class="dot-wrapper">
-                <div class="dot 0" id ="dot0"></div>
-                <div class="dot 4" id ="dot4"></div>
-                <div class="dot 8" id ="dot8"></div>
-                <div class="dot 12" id ="dot12"></div>
-                <div class="dot 16" id ="dot16"></div>
-                <div class="dot 20" id ="dot20"></div>
+                <div class="dot 0" id ="dot0"><h4></h4></div>
+                <div class="dot 4" id ="dot4"><h4></h4></div>
+                <div class="dot 8" id ="dot8"><h4></h4></div>
+                <div class="dot 12" id ="dot12"><h4></h4></div>
+                <div class="dot 16" id ="dot16"><h4></h4></div>
+                <div class="dot 20" id ="dot20"><h4></h4></div>
             </div>
         </div>
-        <h1 style="font-family: 'HSYuji-Regular';">스마트매트의 상태를 확인하여</h1>
-        <h1 style="font-family: 'HSYuji-Regular';">내 몸의 균형을 체크하면서 진행하세요</h1>
+        <h1 style="font-family: 'HSYuji-Regular';">스테핑위치를 확인하고</h1>
+        <h1 style="font-family: 'HSYuji-Regular';">그 위치에 불이 들어오도록 손이나 발로 눌러주세요</h1>
     </div>
 
 </div>

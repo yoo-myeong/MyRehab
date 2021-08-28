@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+        .button{
+            background:#1AAB8A;
+            color:#fff;
+            border:none;
+            position:relative;
+            height:60px;
+            font-size:1.6em;
+            padding:0 2em;
+            cursor:pointer;
+            transition:800ms ease all;
+            outline:none;
+        }
+    </style>
+</head>
+
+<button class = "button" onclick="startGame()">game start</button>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+<script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyC6i4-cibiWIss4e6arom0gkyE5SCHjnpk",
+            authDomain: "devcon043.firebaseapp.com",
+            databaseURL: "https://devcon043-default-rtdb.firebaseio.com",
+            projectId: "devcon043",
+            storageBucket: "devcon043.appspot.com",
+            messagingSenderId: "658895697795",
+            appId: "1:658895697795:web:3ad7b1fea22130c74468b6"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        var database = firebase.database();
+
+        var myGamePiece;
+        var myObstacles = [];
+        var myScore;
+        const buttonTag = document.querySelector(".button");
+
+        function startGame() {
+            myGamePiece = new component(30, 30, "red", 400, 750);
+            myGamePiece.gravity = 0.00;
+            myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+            myGameArea.start();
+            buttonTag.style.display = "none";
+        }
+
+        var myGameArea = {
+            canvas: document.createElement("canvas"),
+            start: function () {
+                this.canvas.width = 800;
+                this.canvas.height = 800;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.frameNo = 0;
+                this.interval = setInterval(updateGameArea, 20);
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            this.score = 0;
+            this.width = width;
+            this.height = height;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.x = x;
+            this.y = y;
+            this.gravity = 0;
+            this.gravitySpeed = 0;
+            this.update = function () {
+                ctx = myGameArea.context;
+                if (this.type == "text") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = color;
+                    ctx.fillText(this.text, this.x, this.y);
+                } else {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+            this.newPos = function () {
+                this.gravitySpeed += this.gravity;
+                this.x += this.speedX;// + this.gravitySpeed;
+                this.y += this.speedY;
+                this.hitBottom();
+            }
+            this.hitBottom = function () {
+                var rockbottom = myGameArea.canvas.width - this.width;
+                if (this.x >= 770) {
+                    this.x = 770;
+                    this.gravitySpeed = 0;
+                }
+                else if (this.x <= 0) {
+                    this.x = 0;
+                    this.gravitySpeed = 0;
+                }
+            }
+            this.crashWith = function (otherobj) {
+                var myleft = this.x;
+                var myright = this.x;
+                var mytop = this.y;
+                var mybottom = this.y;
+                var otherleft = otherobj.x;
+                var otherright = otherobj.x + (otherobj.width);
+                var othertop = otherobj.y;
+                var otherbottom = otherobj.y + (otherobj.width);
+                var crash = true;
+
+                if ((mybottom > othertop+10) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    crash = false;
+                }
+                return crash;
+
+            }
+        }
+
+        function updateGameArea() {
+            var y, width, gap, minWidth, maxWidth, minGap, maxGap;
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    return;
+                }
+            }
+            myGameArea.clear();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo == 1 || everyinterval(220)) { // interva-time func
+                y = myGameArea.canvas.width;
+                minWidth = 0;
+                maxWidth = 800;
+                let data = Math.random()
+                if (data >= 0.8) {
+                    data *= 0.6;
+                }
+
+                width = Math.floor(data * (maxWidth - minWidth + 1) + minWidth);
+                minGap = 200;
+                maxGap = 250;
+                gap = Math.floor(data * (maxGap - minGap + 1) + minGap);
+
+
+                myObstacles.push(new component(width, 10, "green", 0, 0));
+                myObstacles.push(new component(y - width - gap, 10, "green", width + gap, 0));
+                /*
+                myObstacles.push(new component(10, height, "green",x, 0));
+                myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+                */
+            }
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myObstacles[i].y > 800) {
+                    myObstacles[i].y = -1e9;
+                }
+                myObstacles[i].y += 3
+                myObstacles[i].update();
+            }
+            myScore.text = "SCORE: " + myGameArea.frameNo;
+            myScore.update();
+            myGamePiece.newPos();
+            myGamePiece.update();
+        }
+
+        function everyinterval(n) {
+            if ((myGameArea.frameNo / n) % 1 == 0) { return true; }
+            return false;
+        }
+
+        function accelerate(n) {
+            myGamePiece.gravity = n;
+        }
+
+        var LRZ = firebase.database().ref('mpu/Acz/');
+        LRZ.on('value', (snapshot) => {
+            if ((snapshot.val() / 1000) < -5) {
+                myGamePiece.speedX=-3;
+                console.log("left");
+            }
+            else if ((snapshot.val() / 1000) > 0) {
+                myGamePiece.speedX=3;
+                console.log("right");
+            }
+            else if ((snapshot.val() / 1000) >= -10 && (snapshot.val() / 1000) <= 10) {
+                myGamePiece.speedX=0;
+                console.log("stop");
+            }
+        });
+
+    </script>
+</body>
+
+</html>

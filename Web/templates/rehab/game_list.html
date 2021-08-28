@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 style="text-align : center; font-family: 'EliceDigitalBaeum_Bold'; margin : 5rem;">게임을 골라주세요</h1>
+
+<div style="text-align : center;">
+        <button style="display: inline-block; margin : 2rem; width : 10rem; height : 4rem;" onclick="location.href='{% url 'rehab:gyro' %}'">자이로게임</button>
+        <button style="display: inline-block; margin : 2rem; width : 10rem; height : 4rem;" onclick="location.href='{% url 'rehab:rythm' %}'">리듬게임</button>
+</div>
+
+{% endblock %}

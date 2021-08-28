@@ -8,6 +8,15 @@ def index(request):
 def select(request):
     return render(request, 'rehab/RehabSelect.html')
 
+def game_list(request):
+    return render(request, 'rehab/game_list.html')
+
+def gyro(request):
+    return render(request, 'rehab/gyro.html')
+
+def rythm(request):
+    return render(request, 'rehab/rythm.html')
+
 def my_manage(request):
     if request.method == 'POST':
         m = manage(user_id=request.user, part=request.POST.get('part'), level=request.POST.get('step'), create_at=timezone.now())
