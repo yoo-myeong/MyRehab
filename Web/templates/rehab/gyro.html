@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
         canvas {
+            position: absolute;
+            top : 200px;
+            left : 26%;
             border: 1px solid #d3d3d3;
             background-color: #f1f1f1;
         }
-        .button{
-            background:#1AAB8A;
-            color:#fff;
-            border:none;
-            position:relative;
-            height:60px;
-            font-size:1.6em;
-            padding:0 2em;
-            cursor:pointer;
-            transition:800ms ease all;
-            outline:none;
-        }
-    </style>
-</head>
+</style>
 
-<button class = "button" onclick="startGame()">game start</button>
+<div style="text-align:center;">
+    <button onclick="startGame()">Game Start!</button>
+</div>
 <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
 
 <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
@@ -34,6 +24,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
 <script>
+
         var firebaseConfig = {
             apiKey: "AIzaSyC6i4-cibiWIss4e6arom0gkyE5SCHjnpk",
             authDomain: "devcon043.firebaseapp.com",
@@ -50,21 +41,19 @@
         var myGamePiece;
         var myObstacles = [];
         var myScore;
-        const buttonTag = document.querySelector(".button");
 
         function startGame() {
-            myGamePiece = new component(30, 30, "red", 400, 750);
+            myGamePiece = new component(30, 30, "red", 400, 550);
             myGamePiece.gravity = 0.00;
-            myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+            myScore = new component("30px", "Consolas", "black", 320, 40, "text");
             myGameArea.start();
-            buttonTag.style.display = "none";
         }
 
         var myGameArea = {
             canvas: document.createElement("canvas"),
             start: function () {
                 this.canvas.width = 800;
-                this.canvas.height = 800;
+                this.canvas.height = 600;
                 this.context = this.canvas.getContext("2d");
                 document.body.insertBefore(this.canvas, document.body.childNodes[0]);
                 this.frameNo = 0;
@@ -202,7 +191,8 @@
             }
         });
 
-    </script>
-</body>
 
-</html>
+
+    </script>
+
+{% endblock %}
