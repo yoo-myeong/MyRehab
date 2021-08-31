@@ -9,7 +9,10 @@
 }
 
 .canvas{
-    padding : 5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 8rem;
 }
 
 .calendar {
