@@ -10,34 +10,22 @@
 //Provide the RTDB payload printing info and other helper functions.
 #include "addons/RTDBHelper.h"
 
-/* 1. Define the WiFi credentials */
 #define WIFI_SSID "AndroidHotspot5782"
 #define WIFI_PASSWORD "123456780"
 
 #define API_KEY "AIzaSyC6i4-cibiWIss4e6arom0gkyE5SCHjnpk"
 
-/* 3. Define the user Email and password that already registerd or added in your project */
 #define USER_EMAIL "yoou201@gmail.com"
 #define USER_PASSWORD "firebase123"
 
-/* 4. If work with RTDB, define the RTDB URL */
 #define DATABASE_URL "https://devcon043-default-rtdb.firebaseio.com/" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
-/** 5. Define the database secret (optional)
- * 
- * This database secret needed only for this example to modify the database rules
- * 
- * If you edit the database rules yourself, this is not required.
-*/
 #define DATABASE_SECRET "DATABASE_SECRET"
 
-/* 6. Define the Firebase Data object */
 FirebaseData fbdo;
 
-/* 7. Define the FirebaseAuth data for authentication data */
 FirebaseAuth auth;
 
-/* 8. Define the FirebaseConfig data for config data */
 FirebaseConfig config;
 
 unsigned long dataMillis = 0;
@@ -75,11 +63,10 @@ void setup()
 
     Firebase.reconnectWiFi(true);
     fbdo.setResponseSize(12288);
-    fbdo.setBSSLBufferSize(4096, 4096); //minimum size is 512 bytes, maximum size is 16384 bytes
-
+    fbdo.setBSSLBufferSize(4096, 4096); 
     String base_path = "/UsersData/";
     
-    config.token_status_callback = tokenStatusCallback; //see addons/TokenHelper.h
+    config.token_status_callback = tokenStatusCallback; 
 
     config.max_token_generation_retry = 5;
 
@@ -124,7 +111,6 @@ void loop()
   // LED code
   
   Firebase.RTDB.getString(&fbdo, LED_path.c_str(), &get_LED);
-//  Serial.printf("", Firebase.RTDB.getString(&fbdo, LED_path.c_str(), &get_LED));
   for(int i=0; i<4; i++) {
     if (get_LED[i] == '0'){
         digitalWrite(relay[i],HIGH);
@@ -134,9 +120,6 @@ void loop()
       }
   }
   Serial.println(get_LED);
-
-
-  //  PRESS code
 
   for(int i=0; i<12; i++){
     for(int j=0; j<4; j++){
@@ -155,7 +138,6 @@ void loop()
   press_string += "]";
   
   Firebase.RTDB.setString(&fbdo, PRESS_path.c_str(), press_string);
-//  Serial.printf("", Firebase.RTDB.setAsync(&fbdo, PRESS_path.c_str(), press_string));   
 
   Serial.println(press_string);
   Serial.println();

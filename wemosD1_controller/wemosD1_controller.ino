@@ -1,6 +1,5 @@
 #include <Wire.h>
-/* Gyro */
-const int MPU_addr = 0x68; // I2C address of the MPU-6050
+const int MPU_addr = 0x68;
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
 
 int controlPin1[] = {D6,D7,D8,D9};
@@ -12,9 +11,7 @@ int controlPin1[] = {D6,D7,D8,D9};
 #endif
 #include <Firebase_ESP_Client.h>
 
-//Provide the token generation process info.
 #include "addons/TokenHelper.h"
-//Provide the RTDB payload printing info and other helper functions.
 #include "addons/RTDBHelper.h"
 
 #define WIFI_SSID "AndroidHotspot5782"
@@ -48,8 +45,8 @@ void setup()
 
     Wire.begin();
     Wire.beginTransmission(MPU_addr);
-    Wire.write(0x6B); // PWR_MGMT_1 register
-    Wire.write(0); // set to zero (wakes up the MPU-6050)
+    Wire.write(0x6B); 
+    Wire.write(0); 
     Wire.endTransmission(true);
 
     for(int i = 0; i < 4; i++){
@@ -71,14 +68,11 @@ void setup()
 
     Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
 
-    /* Assign the api key (required) */
     config.api_key = API_KEY;
 
-    /* Assign the user sign in credentials */
     auth.user.email = USER_EMAIL;
     auth.user.password = USER_PASSWORD;
 
-    /* Assign the RTDB URL */
     config.database_url = DATABASE_URL;
 
     Firebase.reconnectWiFi(true);
@@ -86,13 +80,10 @@ void setup()
 
     String base_path = "/UsersData/";
 
-    /* Assign the callback function for the long running token generation task */
-    config.token_status_callback = tokenStatusCallback; //see addons/TokenHelper.h
+    config.token_status_callback = tokenStatusCallback; 
 
-    /** Assign the maximum retry of token generation */
     config.max_token_generation_retry = 5;
 
-    /* Initialize the library with the Firebase authen and config */
     Firebase.begin(&config, &auth);
 
     String var = "$userId";
@@ -115,6 +106,9 @@ int PRESS[] = {0,0,0,0,0};
 
 int middle =0;
 bool visited = false; // visited 0 or N, N: press val
+
+int mpu_arr[7];
+
 void loop()
 {
     Wire.beginTransmission(MPU_addr);
@@ -122,21 +116,22 @@ void loop()
     Wire.endTransmission(false);
     Wire.requestFrom(MPU_addr, 14, true); // request a total of 14 registers
 
-    AcX = Wire.read() << 8 | Wire.read(); // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
-    AcY = Wire.read() << 8 | Wire.read(); // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
-    AcZ = Wire.read() << 8 | Wire.read(); // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
-    Tmp = Wire.read() << 8 | Wire.read(); // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
-    GyX = Wire.read() << 8 | Wire.read(); // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
-    GyY = Wire.read() << 8 | Wire.read(); // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
-    GyZ = Wire.read() << 8 | Wire.read(); // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+    mpu_arr[0] = Wire.read() << 8 | Wire.read(); // AcX
+    mpu_arr[1] = Wire.read() << 8 | Wire.read(); // AcY
+    mpu_arr[2] = Wire.read() << 8 | Wire.read(); // AcZ
+    mpu_arr[3] = Wire.read() << 8 | Wire.read(); // Tmp
+    mpu_arr[4] = Wire.read() << 8 | Wire.read(); // GyX
+    mpu_arr[5] = Wire.read() << 8 | Wire.read(); // GyY
+    mpu_arr[6] = Wire.read() << 8 | Wire.read(); // GyZ
     
-
+    String path = "/ctroller/";
     
-    String path = "/mpu/";
-    String press[] = {"/press1/","/press2/","/press3/","/press4/","/press5/"};  
-    Firebase.RTDB.setInt(&fbdo, (path+"/Acz/").c_str(), AcZ);
-//    Serial.printf("Set int... %s\n", Firebase.RTDB.setInt(&fbdo, (path+"/Acz/").c_str(), AcZ) ? "ok" : fbdo.errorReason().c_str());
-   
+    String controller = "[";
+    for(int i = 0; i < 7; i++){
+      controller += mpu_arr[i];
+      controller += ",";
+    }
+    
     for(int i=0; i<5; i++){
       for(int j=0; j<4; j++){
         digitalWrite(controlPin1[j],channel[i][j]);
@@ -145,20 +140,19 @@ void loop()
       PRESS[i] = val;
       Serial.print("Press");
       Serial.print(i);
+      Serial.print("is ");
       Serial.print(PRESS[i]);
+      Serial.print(", ");
     }
 
-    for(int i=0; i<5; i++){
-      if(PRESS[i] > 30 && visited == false){
-        Firebase.RTDB.setInt(&fbdo, (path+press[i]).c_str(), PRESS[i]);
-//        Serial.printf("Press int... %s\n", Firebase.RTDB.setInt(&fbdo, (path+press[i]).c_str(), PRESS[i]) ? "ok" : fbdo.errorReason().c_str());
-          visited = true;
-        }
-      else if(PRESS[i]<=30 && visited == true){
-          Firebase.RTDB.setInt(&fbdo, (path+press[i]).c_str(), middle); //middle : 0
-          visited = false;
-        }
-        
+    for(int i = 0; i < 5; i++){
+      controller += PRESS[i];
+      controller += ",";
     }
+    controller = controller.substring(0,controller.length()-1);
+    controller += "]";
+    
+    Firebase.RTDB.setInt(&fbdo, (path).c_str(), controller);
+    
     Serial.println();
 }

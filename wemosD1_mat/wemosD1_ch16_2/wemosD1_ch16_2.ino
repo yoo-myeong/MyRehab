@@ -1,28 +1,3 @@
-
-/**
- * Created by K. Suwatchai (Mobizt)
- * 
- * Email: k_suwatchai@hotmail.com
- * 
- * Github: https://github.com/mobizt
- * 
- * Copyright (c) 2021 mobizt
- *
-*/
-
-/** This example will show how to authenticate as a user with Email and password.
- * 
- * You need to enable Email/Password provider.
- * In Firebase console, select Authentication, select Sign-in method tab, 
- * under the Sign-in providers list, enable Email/Password provider.
- * 
- * From this example, the user will be granted to access the specific location that matches 
- * the user uid.
- * 
- * This example will modify the database rules to set up the security rule which need to 
- * guard the unauthorized access with the user Email.
-*/
-
 #if defined(ESP32)
 #include <WiFi.h>
 #elif defined(ESP8266)
@@ -35,46 +10,22 @@
 //Provide the RTDB payload printing info and other helper functions.
 #include "addons/RTDBHelper.h"
 
-/* 1. Define the WiFi credentials */
 #define WIFI_SSID "AndroidHotspot5782"
 #define WIFI_PASSWORD "123456780"
 
-/** 2. Define the API key
- * 
- * The API key (required) can be obtained since you created the project and set up 
- * the Authentication in Firebase console. Then you will get the API key from
- * Firebase project Web API key in Project settings, on General tab should show the
- * Web API Key.
- * 
- * You may need to enable the Identity provider at https://console.cloud.google.com/customer-identity/providers 
- * Select your project, click at ENABLE IDENTITY PLATFORM button.
- * The API key also available by click at the link APPLICATION SETUP DETAILS.
- * 
-*/
 #define API_KEY "AIzaSyC6i4-cibiWIss4e6arom0gkyE5SCHjnpk"
 
-/* 3. Define the user Email and password that already registerd or added in your project */
 #define USER_EMAIL "yoou201@gmail.com"
 #define USER_PASSWORD "firebase123"
 
-/* 4. If work with RTDB, define the RTDB URL */
 #define DATABASE_URL "https://devcon043-default-rtdb.firebaseio.com/" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
-/** 5. Define the database secret (optional)
- * 
- * This database secret needed only for this example to modify the database rules
- * 
- * If you edit the database rules yourself, this is not required.
-*/
 #define DATABASE_SECRET "DATABASE_SECRET"
 
-/* 6. Define the Firebase Data object */
 FirebaseData fbdo;
 
-/* 7. Define the FirebaseAuth data for authentication data */
 FirebaseAuth auth;
 
-/* 8. Define the FirebaseConfig data for config data */
 FirebaseConfig config;
 
 unsigned long dataMillis = 0;
@@ -105,14 +56,11 @@ void setup()
 
     Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
 
-    /* Assign the api key (required) */
     config.api_key = API_KEY;
 
-    /* Assign the user sign in credentials */
     auth.user.email = USER_EMAIL;
     auth.user.password = USER_PASSWORD;
 
-    /* Assign the RTDB URL */
     config.database_url = DATABASE_URL;
 
     Firebase.reconnectWiFi(true);
@@ -120,38 +68,12 @@ void setup()
 
     String base_path = "/UsersData/";
 
-    /* Assign the callback function for the long running token generation task */
     config.token_status_callback = tokenStatusCallback; //see addons/TokenHelper.h
 
-    /** Assign the maximum retry of token generation */
     config.max_token_generation_retry = 5;
 
-    /* Initialize the library with the Firebase authen and config */
     Firebase.begin(&config, &auth);
 
-    /** Now modify the database rules (if not yet modified)
-     *
-     * The user, <user uid> in this case will be granted to read and write
-     * at the certain location i.e. "/UsersData/<user uid>".
-     * 
-     * If you database rules has been modified, please comment this code out.
-     * 
-     * The character $ is to make a wildcard variable (can be any name) represents any node key 
-     * which located at some level in the rule structure and use as reference variable
-     * in .read, .write and .validate rules
-     * 
-     * For this case $userId represents any <user uid> node that places under UsersData node i.e.
-     * /UsersData/<user uid> which <user uid> is user UID.
-     * 
-     * Please check your the database rules to see the changes after run the below code.
-    */
-//    String var = "$userId";
-//    String val = "($userId === auth.uid && auth.token.premium_account === true && auth.token.admin === true)";
-//    Firebase.RTDB.setReadWriteRules(&fbdo, base_path.c_str(), var.c_str(), val.c_str(), val.c_str(), DATABASE_SECRET);
-
-    /** path for user data is now "/UsersData/<user uid>"
-     * The user UID can be taken from auth.token.uid
-    */
 }
 
 void loop()
