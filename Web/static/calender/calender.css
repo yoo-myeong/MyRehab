@@ -5,6 +5,7 @@
 
 .dot-wrapper{
     text-align:center;
+    margin-bottom : 3rem;
 }
 
 .calendar {
@@ -139,14 +140,14 @@
     transform: translateY(-50%);
     border-radius: 20px;
     font-size: 20px;
+    text-align : center;
 }
 
 .resv-close{
     cursor: pointer;
     font-size: 20px;
     background-color: #ffffff;
-    text-align: right;
-    float: right;
+    margin : 2rem;
 }
 
 /* 예약인 리스트 */
