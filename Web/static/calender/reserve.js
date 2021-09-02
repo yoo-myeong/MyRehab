@@ -57,31 +57,21 @@ window.onload=()=>{
 new Chart(document.getElementById("line-chart"), {
   type: 'line',
   data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    labels: [5, 6, 7, 8, 9],
     datasets: [{
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Africa",
+        data: [2,5,6,8,4],
+        label: "무릎",
         borderColor: "#3e95cd",
         fill: false
       }, {
-        data: [282,350,411,502,635,809,947,1402,3700,5267],
-        label: "Asia",
+        data: [1,2,3,4,5],
+        label: "어깨",
         borderColor: "#8e5ea2",
         fill: false
       }, {
-        data: [168,170,178,190,203,276,408,547,675,734],
-        label: "Europe",
+        data: [5,1,2,3,6],
+        label: "척추",
         borderColor: "#3cba9f",
-        fill: false
-      }, {
-        data: [40,20,10,16,24,38,74,167,508,784],
-        label: "Latin America",
-        borderColor: "#e8c3b9",
-        fill: false
-      }, {
-        data: [6,3,2,2,7,26,82,172,312,433],
-        label: "North America",
-        borderColor: "#c45850",
         fill: false
       }
     ]
@@ -89,7 +79,7 @@ new Chart(document.getElementById("line-chart"), {
   options: {
     title: {
       display: true,
-      text: 'World population per region (in millions)'
+      text: '횟수 / 월'
     }
   }
 });
@@ -97,17 +87,17 @@ new Chart(document.getElementById("line-chart"), {
 new Chart(document.getElementById("pie-chart"), {
     type: 'pie',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["무릎", "어깨", "척추"],
       datasets: [{
-        label: "Population (millions)",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
+        label: "부위별 수행횟수 비율",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+        data: [25, 15, 17]
       }]
     },
     options: {
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: '부위별 수행횟수 비율'
       }
     }
 });
@@ -115,32 +105,32 @@ new Chart(document.getElementById("pie-chart"), {
 new Chart(document.getElementById("radar-chart"), {
     type: 'radar',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["최고 난이도", "평균 점수", "하루 평균 시도횟수", "하루 평균 수행 시간"],
       datasets: [
         {
-          label: "1950",
+          label: "자이로게임",
           fill: true,
           backgroundColor: "rgba(179,181,198,0.2)",
           borderColor: "rgba(179,181,198,1)",
           pointBorderColor: "#fff",
           pointBackgroundColor: "rgba(179,181,198,1)",
-          data: [8.77,55.61,21.69,6.62,6.82]
+          data: [3, 6.0, 8, 3.24]
         }, {
-          label: "2050",
+          label: "리듬게임",
           fill: true,
           backgroundColor: "rgba(255,99,132,0.2)",
           borderColor: "rgba(255,99,132,1)",
           pointBorderColor: "#fff",
           pointBackgroundColor: "rgba(255,99,132,1)",
           pointBorderColor: "#fff",
-          data: [25.48,54.16,7.61,8.06,4.45]
+          data: [2, 6.2, 5, 1.22]
         }
       ]
     },
     options: {
       title: {
         display: true,
-        text: 'Distribution in % of world population'
+        text: '재활게임 수행 기록'
       }
     }
 });
