@@ -19,7 +19,9 @@
 <br>
 
 ### 📹 시연영상
- 
+
+<iframe width="956" height="538" src="https://www.youtube.com/watch?v=qF2fW21TfUo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <br>
 
 ### 🔨 트러블슈팅
