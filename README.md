@@ -20,7 +20,9 @@
 
 ### 📹 시연영상
 
-https://www.youtube.com/watch?v=qF2fW21TfUo
+*클릭하면 유튜브로 이동*
+
+[![MyRehab_시연영상](http://img.youtube.com/vi/qF2fW21TfUo/0.jpg)](https://youtu.be/qF2fW21TfUo?t=0s) 
 
 <br>
 
