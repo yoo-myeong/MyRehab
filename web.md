@@ -25,7 +25,7 @@
 
 ## 🗃 API 스펙
 
-+ ```POST /manage/``` : 재활치료를 완료한 사용자ID, 부위, 난이도, DateTime을 받음
++ ```POST /manage/``` : 재활치료를 완료한 사용자ID, 부위, 난이도, DateTime을 받아서 DB에 저장
 + ```GET /rehab/``` : 치료 페이지에서 사용될 모델의 이름에 해당하는 부위와 난이도를 받아서 html에 Json 전달
 + ```GET /board/``` : 질문 리스트 조회 API
 + ```GET /board/<int:question_id>/``` : 질문의 제목, 내용, 답변 조회 API
