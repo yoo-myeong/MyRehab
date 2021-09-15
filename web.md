@@ -29,5 +29,6 @@
 + ```GET /rehab/``` : 치료 페이지에서 사용될 모델의 이름에 해당하는 부위와 난이도를 받아서 html에 Json 전달
 + ```GET /board/``` : 질문 리스트 조회 API
 + ```GET /board/<int:question_id>/``` : 질문의 제목, 내용, 답변 조회 API
-+ ```POST /board/answer/create/<int:question_id>/``` : 답변 등록 API
 + ```POST /board/question/create/``` : 질문 등록 API
++ ```POST /board/answer/create/<int:question_id>/``` : 답변 등록 API
+
