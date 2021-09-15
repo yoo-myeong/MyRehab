@@ -33,7 +33,7 @@
 
 ## 🧐 자세한 개발 내용
 
-[WEB](./web.md)
+[W](./web.md)
 
 [SmartMat](./smartmat.md)
 
