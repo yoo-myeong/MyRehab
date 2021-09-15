@@ -1,6 +1,6 @@
 # MyRehab WEB
 
-## 기능
+## 🦾 기능
 
   - 부위와 난이도 설정 
     - 부위와 난이도를 선택하면 선택정보를 서버에 POST방식으로 전송. 
@@ -20,14 +20,14 @@
     - JSON.parse 함수를 사용해서 배열로 변경한 뒤 게임에 필요한 데이터가 포함된 인덱스의 값을 참조
     - 기울기를 사용한 자이로 게임이나 압력을 사용하는 리듬 게임에 적용 
 
-## DB 구조도
+## 🛢 DB 구조도
 ![데이터베이스](./readmeImg/myrehab_sqlite.png)
 
-## API 스펙
+## 🗃 API 스펙
 
 + ```POST /manage/``` : 재활치료를 완료한 부위, 난이도, DateTime을 받음
 + ```GET /rehab/``` : 치료 페이지에서 사용될 모델의 이름에 해당하는 부위와 난이도를 받아서 html에 Json 전달
-+ ```GET /board/``` : 모든 질문 조회 API
++ ```GET /board/``` : 질문 리스트 조회 API
 + ```GET /board/<int:question_id>/``` : 질문의 제목, 내용, 답변 조회 API
 + ```POST /board/answer/create/<int:question_id>/``` : 답변 등록 API
 + ```POST /board/question/create/``` : 질문 등록 API
