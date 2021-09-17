@@ -58,4 +58,4 @@
   
   firebase 공식 문서에서 특정 문서의 데이터에 변화가 생길 때만 값을 가져오는 API를 찾아 사용했다. 
   
- firebase의 ```on``` API를 사용하면 ```snapshot```에 변화 상태를 담을 수 있었고 ```snapshot.val()```로 변화된 값이 무엇인지 확인할 수 있었다.
+  firebase의 ```on``` API를 사용하면 ```snapshot```에 변화 상태를 담을 수 있었고 ```snapshot.val()```로 변화된 값이 무엇인지 확인할 수 있었다.
